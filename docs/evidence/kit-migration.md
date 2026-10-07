@@ -12,7 +12,7 @@ message/signature checks. Public diagnostics disclose only structural changes
 and recognized compute-budget settings, never proof, message or signature bytes.
 
 Final independent installation passed all five stages, strict typechecking,
-both application builds and 77 tests with zero skips. All 54 source inputs
+both application builds and 77 tests with zero skips. All 56 source inputs
 remained unchanged. This includes actual isolated Chrome with synthetic
 wallet/provider inputs. The extracted SDK archive has SHA-256
 `e6ff141b1c13c278f1c6d80dbe1397f187290270c583a32545df5fe4fbd45019`
@@ -33,3 +33,14 @@ The old SDK archives are accessible through Git history and the immutable public
 preview release. Historical provenance and evidence remain unchanged. No private
 journal, wallet, deployment pin, running operator, provider budget or funded state
 was migrated or reset, and this change made no new live provider or chain call.
+
+The first hosted run with the corrected artifact path failed two Chrome startup
+checks before their application assertions ran; 75 of 77 tests passed. The
+[failed run and artifact](kit-migration-hosted-failure.json) and its complete
+[isolation report](kit-migration-hosted-failure-isolated.json) are retained.
+A test-only change waits up to 20 seconds for the same Chrome process to write a
+valid debugging port, without relaunching it, changing sandbox flags or retrying
+application actions. The full independent local check then passed 77/77 with
+56 unchanged inputs; the [initial local report](kit-migration-isolated-initial-results.json)
+is preserved separately. Only the two browser test source hashes changed; SDK
+archive, runtime, custody and deployment inputs remained unchanged.

@@ -23,7 +23,7 @@ class Cdp {
   async evaluate(expression: string) { const r = await this.call('Runtime.evaluate', {expression, awaitPromise: true, returnByValue: true}); if (r.exceptionDetails) throw Error(r.exceptionDetails.exception?.description ?? r.exceptionDetails.text); return r.result.value; }
   async wait(expression: string) { for (let i = 0; i < 300; i++) { if (await this.evaluate(expression)) return; await delay(20); } throw Error('browser condition timed out: ' + expression + '\n' + await this.evaluate('document.body.innerText')); }
 }
-test('production demo runs from the presentation bundle without API/wallet calls or changing stored live data', {skip: !chrome && 'Chromium required', timeout: 30_000}, async t => {
+test('production demo runs from the presentation bundle without API/wallet calls or changing stored live data', {skip: !chrome && 'Chromium required', timeout: 60_000}, async t => {
   const dir = await mkdtemp(join(tmpdir(), 'zkapi-ui-demo-browser-'));
   t.after(() => rm(dir, {recursive: true, force: true, maxRetries: 10, retryDelay: 100}));
   const output = join(dir, 'site'); await buildUi(output);
@@ -34,7 +34,16 @@ test('production demo runs from the presentation bundle without API/wallet calls
   let diagnostic = ''; child.stderr!.on('data', b => { diagnostic = (diagnostic + b).slice(-3000); });
   t.after(async () => { if (child.exitCode === null) { const exited = once(child, 'exit'); child.kill('SIGTERM'); await exited; } });
   let port: number | undefined;
-  for (let i = 0; i < 150; i++) { try { port = Number((await readFile(join(profile, 'DevToolsActivePort'), 'utf8')).split('\n')[0]); break; } catch { assert.equal(child.exitCode, null, diagnostic); await delay(30); } }
+  // Hosted runners can start several isolated Chrome processes concurrently.
+  // Wait for this one process; never relaunch it or retry application actions.
+  const startupDeadline = performance.now() + 20_000;
+  while (performance.now() < startupDeadline) {
+    try {
+      const candidate = Number((await readFile(join(profile, 'DevToolsActivePort'), 'utf8')).split('\n')[0]);
+      if (Number.isInteger(candidate) && candidate > 0 && candidate <= 65535) { port = candidate; break; }
+    } catch { /* The process may not have written its endpoint yet. */ }
+    assert.equal(child.exitCode, null, diagnostic); await delay(30);
+  }
   assert.ok(port, diagnostic);
   const debuggerOrigin = 'http://127.0.0.1:' + port;
   const target = await (await fetch(debuggerOrigin + '/json/new?about:blank', {method: 'PUT'})).json() as any;
@@ -101,7 +110,16 @@ test('Chrome fixtures: wallet rejection/reload and provider one-send/reload/veri
   let diagnostic = ''; child.stderr!.on('data', b => { diagnostic = (diagnostic + b).slice(-3000); });
   t.after(async () => { if (child.exitCode === null) { const exited = once(child, 'exit'); child.kill('SIGTERM'); await exited; } });
   let port: number | undefined;
-  for (let i = 0; i < 150; i++) { try { port = Number((await readFile(join(profile, 'DevToolsActivePort'), 'utf8')).split('\n')[0]); break; } catch { assert.equal(child.exitCode, null, diagnostic); await delay(30); } }
+  // Hosted runners can start several isolated Chrome processes concurrently.
+  // Wait for this one process; never relaunch it or retry application actions.
+  const startupDeadline = performance.now() + 20_000;
+  while (performance.now() < startupDeadline) {
+    try {
+      const candidate = Number((await readFile(join(profile, 'DevToolsActivePort'), 'utf8')).split('\n')[0]);
+      if (Number.isInteger(candidate) && candidate > 0 && candidate <= 65535) { port = candidate; break; }
+    } catch { /* The process may not have written its endpoint yet. */ }
+    assert.equal(child.exitCode, null, diagnostic); await delay(30);
+  }
   assert.ok(port, diagnostic);
   const debuggerOrigin = 'http://127.0.0.1:' + port;
   t.diagnostic('Runtime browser: ' + (await (await fetch(debuggerOrigin + '/json/version')).json() as any).Browser);

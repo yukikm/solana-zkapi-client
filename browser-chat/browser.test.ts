@@ -44,7 +44,7 @@ class Cdp {
 }
 
 test('actual Chrome: unconfigured build has no effects; explicit setup, chat/native history, cancellation and recovery', {
-  skip: !chrome && 'Set ZKAPI_TEST_CHROME to a Chromium executable', timeout: 45_000,
+  skip: !chrome && 'Set ZKAPI_TEST_CHROME to a Chromium executable', timeout: 60_000,
 }, async t => {
   const directory = await mkdtemp(join(tmpdir(), 'zkapi-chat-browser-'));
   const production = await readFile(new URL('../dist/browser-chat/app.js', import.meta.url));
@@ -68,7 +68,16 @@ test('actual Chrome: unconfigured build has no effects; explicit setup, chat/nat
   let diagnostic = ''; child.stderr!.on('data', chunk => { diagnostic = (diagnostic + chunk).slice(-3000); });
   t.after(async () => { if (child.exitCode === null) { const exited = once(child, 'exit'); child.kill('SIGTERM'); await exited; } await rm(directory, { recursive: true, force: true, maxRetries: 10, retryDelay: 100 }); });
   let port: number | undefined;
-  for (let i = 0; i < 160; i++) { try { port = Number((await readFile(join(profile, 'DevToolsActivePort'), 'utf8')).split('\n')[0]); break; } catch { assert.equal(child.exitCode, null, diagnostic); await delay(30); } }
+  // Hosted runners can start several isolated Chrome processes concurrently.
+  // Wait for this one process; never relaunch it or retry application actions.
+  const startupDeadline = performance.now() + 20_000;
+  while (performance.now() < startupDeadline) {
+    try {
+      const candidate = Number((await readFile(join(profile, 'DevToolsActivePort'), 'utf8')).split('\n')[0]);
+      if (Number.isInteger(candidate) && candidate > 0 && candidate <= 65535) { port = candidate; break; }
+    } catch { /* The process may not have written its endpoint yet. */ }
+    assert.equal(child.exitCode, null, diagnostic); await delay(30);
+  }
   assert.ok(port, diagnostic);
   const debuggerOrigin = `http://127.0.0.1:${port}`;
   t.diagnostic(`Runtime browser: ${(await (await fetch(`${debuggerOrigin}/json/version`)).json() as { Browser: string }).Browser}`);
