@@ -1,0 +1,32 @@
+{
+  "name": "solana-zkapi-client",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.19.0 <25",
+    "npm": ">=11 <12"
+  },
+  "scripts": {
+    "build": "node browser-chat/build.mjs",
+    "build:legacy": "node legacy-wallet/launch.ts --out-dir dist/legacy-wallet",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test browser-chat/*.test.ts legacy-wallet/*.test.ts",
+    "check": "npm run typecheck && npm run build && npm run build:legacy && npm run test",
+    "verify:isolated": "node scripts/verify-isolated.mjs"
+  },
+  "dependencies": {
+    "@solana/web3.js": "1.99.0",
+    "@wallet-standard/app": "1.1.1",
+    "@wallet-standard/features": "1.1.1",
+    "@zkapi/solana-sdk": "file:vendor/zkapi-solana-sdk-0.1.0-devnet.1.tgz",
+    "bs58": "6.0.0",
+    "buffer": "6.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "24.10.0",
+    "esbuild": "0.28.2",
+    "typescript": "5.9.3"
+  },
+  "license": "MIT"
+}

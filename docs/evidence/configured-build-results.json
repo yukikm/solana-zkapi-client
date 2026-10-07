@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "scope": "Configured standalone browser build from migrated source and installed SDK tarball, existing reviewed PUBLIC profile only; no host restart, network, wallet, AUTH or inference",
+  "passed": true,
+  "profile_sha256": "270ff0fea81bed8b809b3d4335af7392a95dc122a12414ed0f058abd6af2eaf4",
+  "sdk_tarball_sha256": "fc37358ce00fa7bcb5c43367c8f09b3908c617f9235e8646ae78003a21040c91",
+  "asset_sha256": {
+    "index.html": "d88ac7c55acbbd737a47c57119674d5d7b9f52ad955d48819b4db3be60785fff",
+    "styles.css": "e855e3ac639a26630c25b14bef9845fe349b6c20837e70c1e5601e3d51e1a6e0",
+    "app.js": "0432dfe056d1e2614a6880607dc2b31d74ca0b328b1a6459574a6da4c1359216",
+    "integration.js": "94da5bc077421ae0df30fec5ddc27765df0666a1370e763f34247eca5d2f45e1",
+    "worker.js": "55ee16e2c6f35123658ad9f07696072ec7c5201d5eb0ee51b1cced25cff20d7a"
+  },
+  "private_configuration_copied": false,
+  "live_acceptance": false
+}

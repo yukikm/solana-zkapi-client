@@ -1,0 +1,370 @@
+{
+  "schema": 1,
+  "source_repository": "https://github.com/yukikm/solana-zkapi",
+  "source_revision": "8b550e95a3682f4a864d64784dde18cd7b7c8eb8",
+  "scope": "Presentation code moved; operator relay stays core. Paths/hashes describe migration, not live financial acceptance.",
+  "paths": [
+    {
+      "original_path": "examples/browser-chat/README.md",
+      "original_sha256": "c97a5f42e217b8132170e4d85953c82885f9e9542e180c5407ba8587b0bb1b14",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "browser-chat/README.md",
+      "destination_sha256": "105dbd3644ce997041e9f8bf7d3510e89072126f4d114ff4c294a539b081c5dd",
+      "verbatim_archive": "docs/history/browser-chat-README-before-migration.md",
+      "archive_sha256": "c97a5f42e217b8132170e4d85953c82885f9e9542e180c5407ba8587b0bb1b14"
+    },
+    {
+      "original_path": "examples/browser-chat/app.ts",
+      "original_sha256": "7967d91308b788941473f129eb48ec7e430f7da567c831a9cf604eef86b6a2bd",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "browser-chat/app.ts",
+      "destination_sha256": "7967d91308b788941473f129eb48ec7e430f7da567c831a9cf604eef86b6a2bd"
+    },
+    {
+      "original_path": "examples/browser-chat/browser.test.ts",
+      "original_sha256": "e71febd91fbc7faef14ff38a93dd6d6395974553625d958f7177dcb78be8b0e7",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "browser-chat/browser.test.ts",
+      "destination_sha256": "350bab64909b9b6112c5cbb4da40df3f9f7efb9020d8c5e8e25dd9935d0231a2"
+    },
+    {
+      "original_path": "examples/browser-chat/build.mjs",
+      "original_sha256": "7b6e52e02b4b184bd62211c63f81c2f296cd9b02f5cd9fd9402190a3d41098ea",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "browser-chat/build.mjs",
+      "destination_sha256": "82303dd52b187b52516b867c3dfc4562b9d1508cee45a45f72f73d8c9402f04a"
+    },
+    {
+      "original_path": "examples/browser-chat/chat-model.test.ts",
+      "original_sha256": "1abb88a6d6a61f8110f39de6848f0f86e03edaeadd3624ccf39423affd63b753",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "browser-chat/chat-model.test.ts",
+      "destination_sha256": "1abb88a6d6a61f8110f39de6848f0f86e03edaeadd3624ccf39423affd63b753"
+    },
+    {
+      "original_path": "examples/browser-chat/chat-model.ts",
+      "original_sha256": "88d04e370f7ea91b5372beccde01ce7088dedf4045507d0ad03bafc8172b7808",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "browser-chat/chat-model.ts",
+      "destination_sha256": "88d04e370f7ea91b5372beccde01ce7088dedf4045507d0ad03bafc8172b7808"
+    },
+    {
+      "original_path": "examples/browser-chat/index.html",
+      "original_sha256": "d88ac7c55acbbd737a47c57119674d5d7b9f52ad955d48819b4db3be60785fff",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "browser-chat/index.html",
+      "destination_sha256": "d88ac7c55acbbd737a47c57119674d5d7b9f52ad955d48819b4db3be60785fff"
+    },
+    {
+      "original_path": "examples/browser-chat/integration.ts",
+      "original_sha256": "cb6559f034860446d1eaf1ed41486da7dd586f6335ab878f5f2ceb4332f84d05",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "browser-chat/integration.ts",
+      "destination_sha256": "cb6559f034860446d1eaf1ed41486da7dd586f6335ab878f5f2ceb4332f84d05"
+    },
+    {
+      "original_path": "examples/browser-chat/load-deployment.test.ts",
+      "original_sha256": "2529b192070c39ee3131611f890846d2e695f0f4bcdbe39b9b7538bc2d0cf8b2",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "browser-chat/load-deployment.test.ts",
+      "destination_sha256": "bdcd1886c7c6ffff4a2302cf487965590f6e02f6d9b1d383efba0484063029bd"
+    },
+    {
+      "original_path": "examples/browser-chat/load-deployment.ts",
+      "original_sha256": "6e3df8055627a83749f1b4e221fbe96804d51f9081dfd456caf704302987622c",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "browser-chat/load-deployment.ts",
+      "destination_sha256": "6e3df8055627a83749f1b4e221fbe96804d51f9081dfd456caf704302987622c"
+    },
+    {
+      "original_path": "examples/browser-chat/main.ts",
+      "original_sha256": "45c7934457a7eabec8ae15a34bbec1f6fcea1389b8a86819d7957db80aea9a62",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "browser-chat/main.ts",
+      "destination_sha256": "c4cba49444adb152829ab0bce90fed5f035926ca64e11cde612cad51ca6479fd"
+    },
+    {
+      "original_path": "examples/browser-chat/native-responses.test.ts",
+      "original_sha256": "1cb84ee480d817d270632ac351267cc3aed9cb28083e27ebf492f625c2d12cea",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "browser-chat/native-responses.test.ts",
+      "destination_sha256": "1cb84ee480d817d270632ac351267cc3aed9cb28083e27ebf492f625c2d12cea"
+    },
+    {
+      "original_path": "examples/browser-chat/native-responses.ts",
+      "original_sha256": "298f67a7b1e3257f75ab2946c7f5a313796f5460727645c9cd5116e96ca1f822",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "browser-chat/native-responses.ts",
+      "destination_sha256": "298f67a7b1e3257f75ab2946c7f5a313796f5460727645c9cd5116e96ca1f822"
+    },
+    {
+      "original_path": "examples/browser-chat/reviewed-profiles.ts",
+      "original_sha256": "ac5c6c5c50cf8e18c417517e7bd7bb9e5ff06bf525732306154efe0094b993f3",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "browser-chat/reviewed-profiles.ts",
+      "destination_sha256": "ac5c6c5c50cf8e18c417517e7bd7bb9e5ff06bf525732306154efe0094b993f3"
+    },
+    {
+      "original_path": "examples/browser-chat/shell.ts",
+      "original_sha256": "54ab2b14aa765ed4736938f057a0e1aaac0863da9fed667b0f5a83e38c43f30a",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "browser-chat/shell.ts",
+      "destination_sha256": "54ab2b14aa765ed4736938f057a0e1aaac0863da9fed667b0f5a83e38c43f30a"
+    },
+    {
+      "original_path": "examples/browser-chat/styles.css",
+      "original_sha256": "e855e3ac639a26630c25b14bef9845fe349b6c20837e70c1e5601e3d51e1a6e0",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "browser-chat/styles.css",
+      "destination_sha256": "e855e3ac639a26630c25b14bef9845fe349b6c20837e70c1e5601e3d51e1a6e0"
+    },
+    {
+      "original_path": "examples/browser-chat/tsconfig.json",
+      "original_sha256": "bd3b1175375f6b6088a09abf404c3269798e0214982307e7de2aa9bba31d79c9",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "browser-chat/tsconfig.json",
+      "destination_sha256": "dc333a97cbadd7c3f114c9ee5f18e8c8dfa7fc63b6949a433326145471059d12"
+    },
+    {
+      "original_path": "scripts/i10-wallet-ui/.gitignore",
+      "original_sha256": "4d56952b0fb13bf8f9b6c13a6d4c34a075bac3af447636a1df4335d7576e2f97",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": ".gitignore",
+      "destination_sha256": "ae3517048c8affd429bdd17c2bf72e2c54ba8b22803cb0f6ec9992e2c451cd7e"
+    },
+    {
+      "original_path": "scripts/i10-wallet-ui/README.md",
+      "original_sha256": "6f88d2f0fbcf9a841425eeff676c2be1b562d0f4f8549c9467e3211197b8d5fb",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "legacy-wallet/README.md",
+      "destination_sha256": "05410feb1fcb31be17492d1c457ec38d0343b2b209d6f1cf363cab301ee3f966",
+      "verbatim_archive": "docs/history/legacy-wallet-README-before-migration.md",
+      "archive_sha256": "6f88d2f0fbcf9a841425eeff676c2be1b562d0f4f8549c9467e3211197b8d5fb"
+    },
+    {
+      "original_path": "scripts/i10-wallet-ui/app.ts",
+      "original_sha256": "3b0361efb76e6406235ec93110cfd90ecc21dce1186373e1d322a35b137faec2",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "legacy-wallet/app.ts",
+      "destination_sha256": "19573dc9a7f6177c8ddf6e9cf22105bea1e58ef9a5e9cc343f61bc6eacbfefa6"
+    },
+    {
+      "original_path": "scripts/i10-wallet-ui/browser.test.ts",
+      "original_sha256": "f436fcc198731ed7b5f884d467c7ca4338af3e511ab884873d10503d7642838d",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "legacy-wallet/browser.test.ts",
+      "destination_sha256": "170b1496c5bfd3d04c0536ee33b995064a92a5a618ba3f63f90b3b28eaa214b2"
+    },
+    {
+      "original_path": "scripts/i10-wallet-ui/build.test.ts",
+      "original_sha256": "c37bb84b6f0b3035e6718a47a1e3c028a25a113e27b7bd5c5f4fc663aa313325",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "legacy-wallet/build.test.ts",
+      "destination_sha256": "5f4cd237f851f3af2fb4a27832d76612d55df3298931d2145a28fe36952aa46d"
+    },
+    {
+      "original_path": "scripts/i10-wallet-ui/build.ts",
+      "original_sha256": "47a673265b84538223c3eac575b5a2871e3fa7dea55190c3a0f965d17b248e00",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "legacy-wallet/build.ts",
+      "destination_sha256": "60153520599984a27944e84d8c02c8b5b1b755cf1003b200bca298cd9ef410f4"
+    },
+    {
+      "original_path": "scripts/i10-wallet-ui/demo-entry.ts",
+      "original_sha256": "9606fa2bc4f978d6f56e06fdebab7d6355077c4e48060ef45e6e8b94c2512250",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "legacy-wallet/demo-entry.ts",
+      "destination_sha256": "9606fa2bc4f978d6f56e06fdebab7d6355077c4e48060ef45e6e8b94c2512250"
+    },
+    {
+      "original_path": "scripts/i10-wallet-ui/demo-notes.test.ts",
+      "original_sha256": "c660b058715ee7f7b43fe25fa77e76c96a1d8183b42296086804b56ac6d68df6",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "legacy-wallet/demo-notes.test.ts",
+      "destination_sha256": "97805020129ecab2ad8dd83aa9ea8e9cf3586270c725243252cfcb24c2ed8fa9"
+    },
+    {
+      "original_path": "scripts/i10-wallet-ui/demo-notes.ts",
+      "original_sha256": "41058865530ea40a8c5dabf6a13a9c9cde34e4493661b309bbaaab62ed717c6b",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "legacy-wallet/demo-notes.ts",
+      "destination_sha256": "d18070c0dc092cc002465692863e1cd2b49cdfa5940751ddc60d2d71fe53e394"
+    },
+    {
+      "original_path": "scripts/i10-wallet-ui/demo.css",
+      "original_sha256": "ae9f9cac5e4a7c8dbf9bd04f6411cbc080f9294c2378551bda8244774354819c",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "legacy-wallet/demo.css",
+      "destination_sha256": "ae9f9cac5e4a7c8dbf9bd04f6411cbc080f9294c2378551bda8244774354819c"
+    },
+    {
+      "original_path": "scripts/i10-wallet-ui/demo.html",
+      "original_sha256": "9a78ca86557fc7ce812f047e82efbd16620ad9eb1a35b7daf0f186c7ac11a66f",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "legacy-wallet/demo.html",
+      "destination_sha256": "9a78ca86557fc7ce812f047e82efbd16620ad9eb1a35b7daf0f186c7ac11a66f"
+    },
+    {
+      "original_path": "scripts/i10-wallet-ui/demo.test.ts",
+      "original_sha256": "59f697c53b050223b271645def0efb412f95eaa3852eaf0ce84cf479c9bec2fa",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "legacy-wallet/demo.test.ts",
+      "destination_sha256": "59f697c53b050223b271645def0efb412f95eaa3852eaf0ce84cf479c9bec2fa"
+    },
+    {
+      "original_path": "scripts/i10-wallet-ui/demo.ts",
+      "original_sha256": "baaedcb5b7a369faa87e19fa046fe88c5c56278d78f7716a166b74a635981399",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "legacy-wallet/demo.ts",
+      "destination_sha256": "baaedcb5b7a369faa87e19fa046fe88c5c56278d78f7716a166b74a635981399"
+    },
+    {
+      "original_path": "scripts/i10-wallet-ui/diagnostics.test.ts",
+      "original_sha256": "88a6e545bc972a7ae22fd8a8b3da74873f5e39c997ad0ba31ffde74a632f2b09",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "legacy-wallet/diagnostics.test.ts",
+      "destination_sha256": "ce868b7e8047a72b73c9142018758050c0ad5290fd20b4711b753ded96c820cd"
+    },
+    {
+      "original_path": "scripts/i10-wallet-ui/diagnostics.ts",
+      "original_sha256": "7e19764c308b17469687b3bbce7c942add61cac4a42fec51c9ee4c04b3050e11",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "legacy-wallet/diagnostics.ts",
+      "destination_sha256": "7e19764c308b17469687b3bbce7c942add61cac4a42fec51c9ee4c04b3050e11"
+    },
+    {
+      "original_path": "scripts/i10-wallet-ui/fixture.ts",
+      "original_sha256": "377bff81f91132772eaa47969904de4ad4b7cd4fe2dc5aa32f2cb04c6ce3ad20",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "legacy-wallet/fixture.ts",
+      "destination_sha256": "2f46db1f06e79d4a10354a3bdabf862350020ae2690951664843056ff8073f70"
+    },
+    {
+      "original_path": "scripts/i10-wallet-ui/host.test.ts",
+      "original_sha256": "2a4561c97e4160771e7a2397425cc642ec83855ae71f5e460dbac1b0133e81f0",
+      "destination_repository": "solana-zkapi",
+      "destination_path": "scripts/devnet-browser-relay/host.test.ts",
+      "destination_sha256": "2a4561c97e4160771e7a2397425cc642ec83855ae71f5e460dbac1b0133e81f0"
+    },
+    {
+      "original_path": "scripts/i10-wallet-ui/host.ts",
+      "original_sha256": "11545f39de794b9ccef468618f9fc30502814a6c98b752d317de094f9ee1e202",
+      "destination_repository": "solana-zkapi",
+      "destination_path": "scripts/devnet-browser-relay/host.ts",
+      "destination_sha256": "11545f39de794b9ccef468618f9fc30502814a6c98b752d317de094f9ee1e202"
+    },
+    {
+      "original_path": "scripts/i10-wallet-ui/index.html",
+      "original_sha256": "4efaa048c02d6c75ee108c94019a9ebd6d0fd27e4fc897b34569eb0403d2f8b8",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "legacy-wallet/index.html",
+      "destination_sha256": "4efaa048c02d6c75ee108c94019a9ebd6d0fd27e4fc897b34569eb0403d2f8b8"
+    },
+    {
+      "original_path": "scripts/i10-wallet-ui/launch.ts",
+      "original_sha256": "e1be443112825c00eb36deb677bdc5137926e021937ce2d1d4415c52e391080b",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "legacy-wallet/launch.ts",
+      "destination_sha256": "5a386246c5eabf3be6acaaf731c91b57daac10dd42aa62532fe67717a15d224b"
+    },
+    {
+      "original_path": "scripts/i10-wallet-ui/live-view.test.ts",
+      "original_sha256": "77b2081491146aad7513eb8fa9824cc9c7f48a148bcc4311bc3a4b496fb533a5",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "legacy-wallet/live-view.test.ts",
+      "destination_sha256": "3da90804923d8611272757db712a5acdfa8911e33a948806a321a21391e5ab6e"
+    },
+    {
+      "original_path": "scripts/i10-wallet-ui/live-view.ts",
+      "original_sha256": "96ce4bc47643ea061794c9e48bd2c3229417cf0e2e3d4181dd39423a45bcf730",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "legacy-wallet/live-view.ts",
+      "destination_sha256": "e10a33ec18cb83bed939d5053d0715391fe13afb7389eba902908ad7b11c02cb"
+    },
+    {
+      "original_path": "scripts/i10-wallet-ui/main.ts",
+      "original_sha256": "1a764c82d765a0877e0b62d7f260fdf51ebd4edc18e2832f760a1743f0f292cb",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "legacy-wallet/main.ts",
+      "destination_sha256": "b00544e07dbc3867ed6dcb426f652ed808626344125cec0e8d33e5bb07c9d583"
+    },
+    {
+      "original_path": "scripts/i10-wallet-ui/package-lock.json",
+      "original_sha256": "0536491e0c3f2fe46f4f85d85321b3152c161424056d623b3ba1f64652972f48",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "package-lock.json",
+      "destination_sha256": "7738e575bc0eea8735adf69c664713a832751473fa8ad3e5b7c177a66b52b8c8"
+    },
+    {
+      "original_path": "scripts/i10-wallet-ui/package.json",
+      "original_sha256": "6bd08aa3d58f17abfd6f751208b88d8f766baf05a40298cde552abbfc14e7458",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "package.json",
+      "destination_sha256": "6e2c9930a82e7b071a57802b538c7be1268feff05fe8cb9f085d1c1364b89101"
+    },
+    {
+      "original_path": "scripts/i10-wallet-ui/provider-diagnostics.ts",
+      "original_sha256": "f19afff30c411bd1ef6b0036708e329b54ba62fba2ad5d6c4731e3328582056b",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "legacy-wallet/provider-diagnostics.ts",
+      "destination_sha256": "f19afff30c411bd1ef6b0036708e329b54ba62fba2ad5d6c4731e3328582056b",
+      "additional_core_copy": "scripts/devnet-browser-relay/provider-diagnostics.ts"
+    },
+    {
+      "original_path": "scripts/i10-wallet-ui/provider.fixture.ts",
+      "original_sha256": "c4ce1ed9d8eb9886ed5dc96e1d37411288e53de0bb1e47278165a3d6447f5bfa",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "legacy-wallet/provider.fixture.ts",
+      "destination_sha256": "82b3686d2a08bdc5338adcdff266e9fb9dc341f4fd26ca462f408c6ef15ac8f1"
+    },
+    {
+      "original_path": "scripts/i10-wallet-ui/provider.test.ts",
+      "original_sha256": "f8fa2179f659df76db078a7b0b6bc3cbb4471ac4336e0d14d88cbec7d6b8557c",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "legacy-wallet/provider.test.ts",
+      "destination_sha256": "1c84dc103ed293c03b4b4e255a2fd28f0c2dbe1b3a2750bd234cd4e61a28b33e"
+    },
+    {
+      "original_path": "scripts/i10-wallet-ui/provider.ts",
+      "original_sha256": "93caed7b187cb69ee14515192fb1d6e5b9a21082ce424df1a011f29c8a4a93c0",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "legacy-wallet/provider.ts",
+      "destination_sha256": "dc3455cdc8f326a4adcbf7592da645d88496c454ce9631784a531ac4fca340ec"
+    },
+    {
+      "original_path": "scripts/i10-wallet-ui/signing-diagnostics.test.ts",
+      "original_sha256": "122b06d34b51d4c657b6ef7fbc0c0e6f99a105a3afa86064bdaf8418d93c83bd",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "legacy-wallet/signing-diagnostics.test.ts",
+      "destination_sha256": "122b06d34b51d4c657b6ef7fbc0c0e6f99a105a3afa86064bdaf8418d93c83bd"
+    },
+    {
+      "original_path": "scripts/i10-wallet-ui/signing-diagnostics.ts",
+      "original_sha256": "3f3c723929a854d40032b778bfc277af3c57e2257efe0ccc9fbb022affe6335f",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "legacy-wallet/signing-diagnostics.ts",
+      "destination_sha256": "3f3c723929a854d40032b778bfc277af3c57e2257efe0ccc9fbb022affe6335f"
+    },
+    {
+      "original_path": "scripts/i10-wallet-ui/storage.ts",
+      "original_sha256": "d8ee8bee0df4cb6a043d4a66ab5208c26e95fc628a686fea2cf5bb26f92d7af3",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "legacy-wallet/storage.ts",
+      "destination_sha256": "d8ee8bee0df4cb6a043d4a66ab5208c26e95fc628a686fea2cf5bb26f92d7af3"
+    },
+    {
+      "original_path": "scripts/i10-wallet-ui/style.css",
+      "original_sha256": "026b0fd2dc27d996889936ddba5d06334f2e8e0b438af7291a330d8002e764bd",
+      "destination_repository": "solana-zkapi-client",
+      "destination_path": "legacy-wallet/style.css",
+      "destination_sha256": "026b0fd2dc27d996889936ddba5d06334f2e8e0b438af7291a330d8002e764bd"
+    }
+  ],
+  "public_fixture_copies": [
+    {
+      "source": "tests/fixtures/vault/genesis-a.json",
+      "destination": "tests/fixtures/genesis-a.json",
+      "sha256": "495a322bf4e05eb1e15d9750dbbb11f0782982752ec45efbcd096d5b77c17c96"
+    }
+  ]
+}

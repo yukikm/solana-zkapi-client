@@ -1,0 +1,26 @@
+name: independent-client
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  browser-applications:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24.19.0'
+      - name: Install pinned npm and dependencies
+        run: |
+          npm install --global npm@11.9.0
+          npm ci --ignore-scripts --no-audit --no-fund
+          echo "ZKAPI_TEST_CHROME=$(command -v google-chrome)" >> "$GITHUB_ENV"
+      - name: Verify independent installation, both builds and all browser tests
+        run: npm run verify:isolated
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: isolated-client-devnet-preview
+          path: docs/evidence/devnet-preview-isolated-results.json
+          if-no-files-found: error
