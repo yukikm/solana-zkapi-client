@@ -15,7 +15,7 @@ export async function connectChat(options: {
   mode: Mode;
   initializeStorage?: boolean;
 }) {
-  // Browser web3 consumers need the same pinned Buffer polyfill as the SDK.
+  // The SDK uses the pinned Buffer polyfill for protocol encodings.
   Object.assign(globalThis, { Buffer });
   const deployment = await loadDeployment(options.profile);
   const browser = await createBrowserClient({ ...deployment, wallet: walletStandardAdapter(options.wallet, options.account, options.chain),

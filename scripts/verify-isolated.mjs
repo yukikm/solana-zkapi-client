@@ -9,8 +9,8 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const npmCli = process.env.npm_execpath;
 if (!npmCli) throw Error('Run npm run verify:isolated');
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
-const sdkTarball = 'vendor/zkapi-solana-sdk-0.1.0-devnet.1.tgz';
-const provenanceFile = 'vendor/provenance-0.1.0-devnet.1.json';
+const sdkTarball = 'vendor/zkapi-solana-sdk-0.2.0-devnet.1.tgz';
+const provenanceFile = 'vendor/provenance-0.2.0-devnet.1.json';
 const provenance = JSON.parse(await readFile(join(root, provenanceFile), 'utf8'));
 const packageJson = JSON.parse(await readFile(join(root, 'package.json'), 'utf8'));
 if (packageJson.dependencies['@zkapi/solana-sdk'] !== 'file:' + sdkTarball
@@ -46,6 +46,11 @@ try {
   const installed = join(temp, 'node_modules/@zkapi/solana-sdk');
   if ((await lstat(installed)).isSymbolicLink() || !relative(await realpath(temp), await realpath(installed)).startsWith('node_modules/')) throw Error('SDK must be a local extracted package');
   result.sdk_installed_as_extracted_package = true;
+  const installedLock = JSON.parse(await readFile(join(temp, 'package-lock.json'), 'utf8'));
+  if (Object.keys(installedLock.packages ?? {}).some(name => name.endsWith('node_modules/@solana/web3.js')))
+    throw Error('Legacy Solana runtime found in the installed dependency graph');
+  result.kit_version = JSON.parse(await readFile(join(temp, 'node_modules/@solana/kit/package.json'), 'utf8')).version;
+  result.legacy_solana_runtime_absent = true;
   await stage('typecheck', ['run', 'typecheck']);
   await stage('standalone-build', ['run', 'build']);
   await stage('legacy-build', ['run', 'build:legacy']);
@@ -67,6 +72,6 @@ try {
 } finally {
   result.finished_at = new Date().toISOString();
   await mkdir(join(root, 'docs/evidence'), {recursive: true});
-  await writeFile(join(root, 'docs/evidence/devnet-preview-isolated-results.json'), JSON.stringify(result, null, 2) + '\n');
+  await writeFile(join(root, 'docs/evidence/kit-migration-isolated-results.json'), JSON.stringify(result, null, 2) + '\n');
   await rm(temp, {recursive: true, force: true, maxRetries: 10, retryDelay: 100});
 }

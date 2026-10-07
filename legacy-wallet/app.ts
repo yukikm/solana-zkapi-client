@@ -1,6 +1,6 @@
 import {getWallets} from '@wallet-standard/app';
 import type {StandardConnectFeature, StandardEventsFeature} from '@wallet-standard/features';
-import {PublicKey, VersionedTransaction} from '@solana/web3.js';
+import {address, getCompiledTransactionMessageDecoder, getTransactionDecoder, getTransactionEncoder, type Transaction} from '@solana/kit';
 import {walletStandardAdapter, type StandardWallet, type StandardAccount} from '@zkapi/solana-sdk/wallet-standard';
 import {EncryptedJournal, IndexedDbJournalStore} from '@zkapi/solana-sdk/journal';
 import {validateNoteJournal, type NoteJournal} from '@zkapi/solana-sdk/control';
@@ -17,7 +17,7 @@ import {beginNextDemoDeposit, canStartDemo, checkedProviderBudget, latestDemoNot
 export interface UiOptions {
   fixtureOnly: boolean; financialEnabled?: boolean; targetWallet: string; runId: string; manifest: VerifiedManifest;
   initialize(journal: EncryptedJournal<NoteJournal>, signer: V0Wallet): Promise<Omit<WalletOptions, 'journal' | 'wallets'> & {providerOptions?: Omit<UiProviderOptions, 'journal'>}>;
-  fee(transaction: VersionedTransaction): Promise<number>;
+  fee(transaction: Transaction): Promise<number>;
   /** Read-only availability; the host still reserves each new request atomically. */
   providerBudget?(): Promise<UiProviderBudget>;
   /** Synthetic presentation clock. Refused by the real deployment entry. */
@@ -275,17 +275,17 @@ export function mountWalletUi(options: UiOptions): void {
     const storageName = `${m.manifest_hash}:${options.runId}:${account.address}`;
     const store = await IndexedDbJournalStore.open('zkapi-i10-ui:' + storageName);
     journal = new EncryptedJournal(store, await journalKey(storageName), {deploymentId: m.deployment_id, pool: m.pool}, validateNoteJournal);
-    const signer: V0Wallet = {publicKey: new PublicKey(account.address), supportedTransactionVersions: new Set([0]),
+    const signer: V0Wallet = {publicKey: address(account.address), supportedTransactionVersions: new Set([0]),
       async signTransaction(tx) {
         if (options.financialEnabled === false) throw Error('read-only host');
-        if (tx.version !== 0 || tx.serialize().length > 1232) throw Error('v0 wire bound');
+        if (getCompiledTransactionMessageDecoder().decode(tx.messageBytes).version !== 0 || getTransactionEncoder().encode(tx).length > 1232) throw Error('v0 wire bound');
         const fee = await options.fee(tx); if (!Number.isSafeInteger(fee) || fee < 0 || fee > 10_000) throw Error('transaction fee cap');
         const before = await journal!.read(noteId), op = before?.value.wallet?.operation;
         recordEvent('signature_requested', op?.id, op?.attempts.length);
         await refresh();
         status('Review the signature request in Phantom promptly; this transaction has an expiry. If you are not ready, reject it and request a new signature when ready.');
-        const reviewed = VersionedTransaction.deserialize(tx.serialize());
-        let signed: VersionedTransaction;
+        const reviewed = getTransactionDecoder().decode(getTransactionEncoder().encode(tx));
+        let signed: Transaction;
         try {
           signed = await adapter.signTransaction(tx);
         }

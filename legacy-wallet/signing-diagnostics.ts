@@ -1,6 +1,6 @@
 /** Read-only, public structural observations. Never a signature verifier or an
  * authorization to accept a wallet-modified transaction. */
-import {ComputeBudgetProgram, TransactionMessage, type TransactionInstruction, type VersionedTransaction} from '@solana/web3.js';
+import {address, decompileTransactionMessage, getCompiledTransactionMessageDecoder, type Instruction, type ReadonlyUint8Array, type Transaction} from '@solana/kit';
 
 export interface InstructionDiagnostic {
   /** Null means the program is behind an unresolved address lookup. */
@@ -12,7 +12,7 @@ export interface InstructionDiagnostic {
   };
 }
 export interface SigningDiagnostic {
-  version: {original: VersionedTransaction['version']; returned: VersionedTransaction['version']};
+  version: {original: 'legacy' | 0; returned: 'legacy' | 0};
   message_equal: boolean;
   header_equal: boolean;
   blockhash_equal: boolean;
@@ -24,18 +24,24 @@ export interface SigningDiagnostic {
   original_non_compute_instructions_retained: boolean | null;
   non_compute_instructions_equal: boolean | null;
 }
-const equalBytes = (a: Uint8Array, b: Uint8Array) => a.length === b.length && a.every((byte, index) => byte === b[index]);
+const equalBytes = (a: ReadonlyUint8Array, b: ReadonlyUint8Array) => a.length === b.length && a.every((byte, index) => byte === b[index]);
 const equalNumbers = (a: readonly number[], b: readonly number[]) => a.length === b.length && a.every((value, index) => value === b[index]);
-const computeProgram = ComputeBudgetProgram.programId.toBase58();
-
-function instructions(transaction: VersionedTransaction): InstructionDiagnostic[] {
-  return transaction.message.compiledInstructions.map(instruction => {
-    const programId = transaction.message.staticAccountKeys[instruction.programIdIndex]?.toBase58() ?? null;
-    const summary: InstructionDiagnostic = {programId, dataLength: instruction.data.length};
+const computeProgram = address('ComputeBudget111111111111111111111111111111');
+function message(transaction: Transaction) {
+  const decoded = getCompiledTransactionMessageDecoder().decode(transaction.messageBytes);
+  if (decoded.version !== 0 && decoded.version !== 'legacy') throw Error('unsupported diagnostic transaction version');
+  return decoded;
+}
+function instructions(transaction: Transaction): InstructionDiagnostic[] {
+  const compiled = message(transaction);
+  return compiled.instructions.map(instruction => {
+    const programId = compiled.staticAccounts[instruction.programAddressIndex] ?? null;
+    const bytes = instruction.data ?? new Uint8Array();
+    const summary: InstructionDiagnostic = {programId, dataLength: bytes.length};
     // Only decode the exact, account-free known ComputeBudget wire layouts.
     // Other instruction payloads (including Vault proof data) are never exposed.
-    if (programId === computeProgram && instruction.accountKeyIndexes.length === 0) {
-      const bytes = instruction.data, opcode = bytes[0];
+    if (programId === computeProgram && (instruction.accountIndices?.length ?? 0) === 0) {
+      const opcode = bytes[0];
       const kind = opcode === 1 ? 'RequestHeapFrame' : opcode === 2 ? 'SetComputeUnitLimit'
         : opcode === 3 ? 'SetComputeUnitPrice' : opcode === 4 ? 'SetLoadedAccountsDataSizeLimit' : undefined;
       if (kind && bytes.length === (opcode === 3 ? 9 : 5)) {
@@ -46,23 +52,23 @@ function instructions(transaction: VersionedTransaction): InstructionDiagnostic[
     return summary;
   });
 }
-function nonCompute(transaction: VersionedTransaction): TransactionInstruction[] | null {
+function nonCompute(transaction: Transaction): readonly Instruction[] | null {
   try {
-    return TransactionMessage.decompile(transaction.message).instructions.filter(instruction => !instruction.programId.equals(ComputeBudgetProgram.programId));
+    return decompileTransactionMessage(message(transaction)).instructions.filter(instruction => instruction.programAddress !== computeProgram);
   } catch { return null; }
 }
-function exactInstruction(a: TransactionInstruction, b: TransactionInstruction): boolean {
-  return a.programId.equals(b.programId) && equalBytes(a.data, b.data) && a.keys.length === b.keys.length
-    && a.keys.every((key, index) => key.pubkey.equals(b.keys[index].pubkey)
-      && key.isSigner === b.keys[index].isSigner && key.isWritable === b.keys[index].isWritable);
+function exactInstruction(a: Instruction, b: Instruction): boolean {
+  const aAccounts = a.accounts ?? [], bAccounts = b.accounts ?? [];
+  return a.programAddress === b.programAddress && equalBytes(a.data ?? new Uint8Array(), b.data ?? new Uint8Array()) && aAccounts.length === bAccounts.length
+    && aAccounts.every((key, index) => key.address === bAccounts[index].address && key.role === bAccounts[index].role);
 }
 
-/** Snapshot the original transaction before awaiting the wallet, e.g. with
- * VersionedTransaction.deserialize(transaction.serialize()). No account address,
- * blockhash, transaction bytes, signature bytes or non-compute data is returned.
- * The existing SDK must still perform every exact-message/signature check. */
-export function signingDiagnostics(original: VersionedTransaction, returned: VersionedTransaction): SigningDiagnostic {
-  const a = original.message, b = returned.message, originalNonCompute = nonCompute(original), returnedNonCompute = nonCompute(returned);
+/** Snapshot the original with the Kit transaction encoder/decoder before
+ * awaiting the wallet. No account address, blockhash, transaction bytes,
+ * signature bytes or non-compute data is returned. The SDK must still perform
+ * every exact-message/signature check. */
+export function signingDiagnostics(original: Transaction, returned: Transaction): SigningDiagnostic {
+  const a = message(original), b = message(returned), originalNonCompute = nonCompute(original), returnedNonCompute = nonCompute(returned);
   let retained: boolean | null = null, exact: boolean | null = null;
   if (originalNonCompute && returnedNonCompute) {
     let cursor = 0;
@@ -73,21 +79,20 @@ export function signingDiagnostics(original: VersionedTransaction, returned: Ver
     exact = originalNonCompute.length === returnedNonCompute.length
       && originalNonCompute.every((instruction, index) => exactInstruction(instruction, returnedNonCompute[index]));
   }
-  let messageEqual = false;
-  try { messageEqual = equalBytes(a.serialize(), b.serialize()); } catch { /* Malformed messages cannot be equal. */ }
+  const aLookups = a.version === 0 ? a.addressTableLookups ?? [] : [], bLookups = b.version === 0 ? b.addressTableLookups ?? [] : [];
   return {
-    version: {original: original.version, returned: returned.version},
-    message_equal: messageEqual,
-    header_equal: a.header.numRequiredSignatures === b.header.numRequiredSignatures
-      && a.header.numReadonlySignedAccounts === b.header.numReadonlySignedAccounts
-      && a.header.numReadonlyUnsignedAccounts === b.header.numReadonlyUnsignedAccounts,
-    blockhash_equal: a.recentBlockhash === b.recentBlockhash,
-    accounts_equal: a.staticAccountKeys.length === b.staticAccountKeys.length
-      && a.staticAccountKeys.every((key, index) => key.equals(b.staticAccountKeys[index])),
-    ALT_equal: a.addressTableLookups.length === b.addressTableLookups.length
-      && a.addressTableLookups.every((lookup, index) => lookup.accountKey.equals(b.addressTableLookups[index].accountKey)
-        && equalNumbers(lookup.writableIndexes, b.addressTableLookups[index].writableIndexes)
-        && equalNumbers(lookup.readonlyIndexes, b.addressTableLookups[index].readonlyIndexes)),
+    version: {original: a.version, returned: b.version},
+    message_equal: equalBytes(original.messageBytes, returned.messageBytes),
+    header_equal: a.header.numSignerAccounts === b.header.numSignerAccounts
+      && a.header.numReadonlySignerAccounts === b.header.numReadonlySignerAccounts
+      && a.header.numReadonlyNonSignerAccounts === b.header.numReadonlyNonSignerAccounts,
+    blockhash_equal: a.lifetimeToken === b.lifetimeToken,
+    accounts_equal: a.staticAccounts.length === b.staticAccounts.length
+      && a.staticAccounts.every((key, index) => key === b.staticAccounts[index]),
+    ALT_equal: aLookups.length === bLookups.length
+      && aLookups.every((lookup, index) => lookup.lookupTableAddress === bLookups[index].lookupTableAddress
+        && equalNumbers(lookup.writableIndexes, bLookups[index].writableIndexes)
+        && equalNumbers(lookup.readonlyIndexes, bLookups[index].readonlyIndexes)),
     original_instructions: instructions(original), returned_instructions: instructions(returned),
     original_non_compute_instructions_retained: retained, non_compute_instructions_equal: exact,
   };

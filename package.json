@@ -16,12 +16,12 @@
     "verify:isolated": "node scripts/verify-isolated.mjs"
   },
   "dependencies": {
-    "@solana/web3.js": "1.99.0",
     "@wallet-standard/app": "1.1.1",
     "@wallet-standard/features": "1.1.1",
-    "@zkapi/solana-sdk": "file:vendor/zkapi-solana-sdk-0.1.0-devnet.1.tgz",
+    "@zkapi/solana-sdk": "file:vendor/zkapi-solana-sdk-0.2.0-devnet.1.tgz",
     "bs58": "6.0.0",
-    "buffer": "6.0.3"
+    "buffer": "6.0.3",
+    "@solana/kit": "8.4.0"
   },
   "devDependencies": {
     "@types/node": "24.10.0",

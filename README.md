@@ -5,7 +5,7 @@ package tarball. The protocol, SDK, native clientd, deployment tooling and opera
 services live in [solana-zkapi](https://github.com/yukikm/solana-zkapi). An app or
 AI agent can use that project without installing this demonstration repository.
 
-**Devnet preview.** This application uses SDK `0.1.0-devnet.1`. SDK tarballs and
+**Devnet preview.** This application uses SDK `0.2.0-devnet.1` with `@solana/kit@8.4.0`. SDK tarballs and
 local clientd downloads belong to the [core releases](https://github.com/yukikm/solana-zkapi/releases).
 This repository provides example applications; it does not provide a production
 operator or mainnet deployment. The [integration table](https://github.com/yukikm/solana-zkapi/blob/main/docs/integrations/README.md)
@@ -13,7 +13,7 @@ records the tested OpenClaw route and current Claude Code/Codex incompatibilitie
 
 ## Install and build
 
-Use Node 24.19.0 and npm 11.9.0. The reviewed SDK tarball in `vendor/` is included
+Use Node 24.19.0 and npm 11.9.0. The versioned SDK tarball in `vendor/` is included
 with this source checkout, with its SHA256 and provenance in
 [vendor/README.md](vendor/README.md). No npm registry publication, workspace link,
 or adjacent core checkout is required to build.
@@ -32,15 +32,29 @@ authenticated tariffs and service endpoints are deployment inputs; the SDK
 package does not invent trust pins or contain private service credentials.
 
 `npm run verify:isolated` reproduces clean installation and both application builds
-in a temporary directory without a core checkout. [Preview evidence](docs/evidence/devnet-preview.md)
-records the current package; [migration evidence](docs/evidence/migration.md)
-preserves the earlier package checks. The GitHub Actions workflow runs the same
+in a temporary directory without a core checkout. [Kit migration evidence](docs/evidence/kit-migration.md)
+records the current package; [preview evidence](docs/evidence/devnet-preview.md)
+and [migration evidence](docs/evidence/migration.md) preserve earlier checks. The GitHub Actions workflow runs the same
 isolation check and requires all browser tests to run without skips.
 
 `npm run check` runs strict typechecking, builds both applications and runs
 the migrated tests. Browser tests use an isolated Chromium profile and synthetic
 wallet/provider inputs. Set `ZKAPI_TEST_CHROME` when Chromium is not at a standard
 path. These tests do not claim Phantom, real-provider, or public-chain acceptance.
+
+## Solana Kit integration
+
+Both applications and the SDK use native Kit RPC, address and transaction types.
+There is no `@solana/web3.js` dependency or compatibility runtime in the installed
+package graph. Wallet discovery and connection continue to use Wallet Standard.
+The adapter sends the exact serialized v0 transaction to the selected wallet;
+the SDK verifies the returned message and signatures before saving or sending it.
+
+SDK `0.2.0-devnet.1` changes low-level public types: `V0Wallet.publicKey` is a Kit
+`Address` string, `signTransaction` consumes and returns a Kit `Transaction`, and
+`ClientDeployment.connection` is a Kit `Rpc<SolanaRpcApi>`. Account derivation is
+asynchronous. High-level deposit, settlement and recovery remain the existing
+SDK journal workflow. Preserve existing origins, note IDs and deployment pins.
 
 ## Applications
 

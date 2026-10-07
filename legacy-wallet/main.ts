@@ -1,11 +1,11 @@
 import {Buffer} from 'buffer';
-import {Connection, PublicKey} from '@solana/web3.js';
+import {address, getBase64Decoder, getBase64Encoder, type TransactionMessageBytesBase64} from '@solana/kit';
 import {parseStrictJson, verifyManifest, type ArtifactBundle, type ManifestTrustPolicy} from '@zkapi/solana-sdk/trust';
 import {ControlClient, verifiedClientBundle} from '@zkapi/solana-sdk/control';
 import {NoteProver} from '@zkapi/solana-sdk/prover';
 import {WorkerProver} from '@zkapi/solana-sdk/prover-runtime';
 import {SolanaWalletChain} from '@zkapi/solana-sdk/wallet-chain';
-import {connectionTransport, resolvePreparationCommitment, type TransactionPreparationCommitment} from '@zkapi/solana-sdk/transport';
+import {connectionTransport, createSolanaRpcWithFetch, resolvePreparationCommitment, type TransactionPreparationCommitment} from '@zkapi/solana-sdk/transport';
 import {mountWalletUi} from './app.ts';
 import {ProverSessionVerifier} from '@zkapi/solana-sdk/control-prover';
 import type {UiProviderConfiguration} from './provider.ts';
@@ -31,22 +31,22 @@ async function main() {
     else throw Error('unconfigured network destination');
     return fetch(path, {...init, ...(snapshotSignal ? {signal: init?.signal ? AbortSignal.any([snapshotSignal, init.signal]) : snapshotSignal} : {}), credentials: 'omit', redirect: 'error', cache: 'no-store'});
   };
-  const connection = new Connection(logicalRpc, {commitment: 'finalized', fetch: proxyFetch, disableRetryOnRateLimit: true});
-  const genesis = await connection.getGenesisHash();
+  const connection = createSolanaRpcWithFetch(logicalRpc, proxyFetch);
+  const genesis = await connection.getGenesisHash().send();
   if (genesis !== config.policy.expected.genesis_hash) throw Error('devnet genesis mismatch');
   mountWalletUi({fixtureOnly: false, financialEnabled: config.allowTransactions, targetWallet: 'Phantom', runId: config.runId, manifest,
     ...(config.provider ? {providerBudget: async () => parseStrictJson(await read('/provider-budget')) as unknown as UiProviderBudget} : {}),
-    fee: async tx => { const result = await connection.getFeeForMessage(tx.message, preparationCommitment); if (result.value === null) throw Error('fee unavailable'); return result.value; },
+    fee: async tx => { const result = await connection.getFeeForMessage(getBase64Decoder().decode(tx.messageBytes) as TransactionMessageBytesBase64, {commitment: preparationCommitment}).send(); if (result.value === null || result.value > BigInt(Number.MAX_SAFE_INTEGER)) throw Error('fee unavailable'); return Number(result.value); },
     initialize: async journal => {
       const artifacts: Record<string, Uint8Array> = Object.create(null), additional: Record<string, Uint8Array> = Object.create(null);
       for (const name of config.artifactNames) {
         const value = await read('/artifact/' + encodeURIComponent(name));
         if (name.startsWith('additional:')) additional[name.slice(11)] = value; else artifacts[name] = value;
       }
-      const observed = await connection.getAccountInfoAndContext(new PublicKey(manifest.pool), 'finalized');
+      const observed = await connection.getAccountInfo(address(manifest.pool), {commitment: 'finalized', encoding: 'base64'}).send();
       if (!observed.value) throw Error('finalized pool unavailable');
       const a = observed.value, bundle = await verifiedClientBundle(manifest, genesis, {address: manifest.pool,
-        owner: a.owner.toBase58(), executable: a.executable, lamports: BigInt(a.lamports), data: a.data,
+        owner: a.owner, executable: a.executable, lamports: BigInt(a.lamports), data: new Uint8Array(getBase64Encoder().encode(a.data[0])),
         slot: BigInt(observed.context.slot), commitment: 'finalized'}, BigInt(observed.context.slot), {...artifacts, additional} as unknown as ArtifactBundle);
       const engine = new WorkerProver(new Worker('/worker.js', {type: 'module'}), await read('/wasm'), config.wasmSha256);
       const prover = await NoteProver.create(manifest, bundle.artifacts, engine);
@@ -90,7 +90,7 @@ async function main() {
     void (async () => { for (let attempt = 0; attempt < 30; attempt++) { if (await checkHistory()) break; await new Promise(resolve => setTimeout(resolve, 10_000)); } })();
   }
 }
-// web3 and the pinned SDK use the exact-pinned browser Buffer implementation.
+// Protocol encodings use the exact-pinned browser Buffer implementation.
 Object.assign(globalThis, {Buffer});
 void main().catch(() => {
   document.getElementById('status')!.textContent = 'The live devnet connection is unavailable. Your saved state is preserved. Restore the local services, then reload this same URL.';

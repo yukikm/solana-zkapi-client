@@ -1,5 +1,6 @@
 /** App-owned public asset loader. Trust pins are compiled into the app separately. */
-import { Connection, PublicKey } from '@solana/web3.js';
+import { address } from '@solana/kit';
+import { createSolanaRpcWithFetch } from '@zkapi/solana-sdk/transport';
 import type { ArtifactBundle, ClientDeployment, CreateClientOptions, ManifestTrustPolicy, ModelConfiguration, Mode } from '@zkapi/solana-sdk';
 import { parseStrictJson } from '@zkapi/solana-sdk/trust';
 
@@ -45,7 +46,7 @@ function fields(value: any, required: string[], optional: string[] = []) {
 function digest(value: unknown) { requireProfile(typeof value === 'string' && /^[0-9a-f]{64}$/.test(value)); }
 function publicKey(value: unknown) {
   requireProfile(typeof value === 'string' && /^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(value));
-  requireProfile(new PublicKey(value).toBase58() === value);
+  requireProfile(address(value) === value);
 }
 function origin(value: unknown) {
   requireProfile(typeof value === 'string'); const url = new URL(value);
@@ -115,7 +116,7 @@ export function parseReviewedDevnetProfile(bytes: Uint8Array): ReviewedChatProfi
   return p as ReviewedChatProfile;
 }
 
-/** One bounded app-owned routing adapter for both SDK HTTP and web3 RPC.
+/** One bounded app-owned routing adapter for both SDK HTTP and Kit RPC.
  * Provider traffic stays direct; no route can downgrade it to the relay. */
 export function createDevnetRelayFetch(profile: ReviewedBrowserProfile, pageOrigin: string, fetcher: typeof fetch = globalThis.fetch): typeof fetch {
   const p = structuredClone(profile), app = new URL(pageOrigin);
@@ -128,7 +129,7 @@ export function createDevnetRelayFetch(profile: ReviewedBrowserProfile, pageOrig
   const receipts = new RegExp(`^/zkapi/v1/sessions/${UUID}/receipts$`), operation = new RegExp(`^/zkapi/v1/sessions/${UUID}/operations/${UUID}$`);
   const rpcMethods = new Set(['getGenesisHash', 'getLatestBlockhash', 'getBlockHeight', 'getBlockTime', 'getSlot', 'getBalance', 'getAccountInfo', 'getMultipleAccounts', 'getFeeForMessage', 'getSignatureStatuses', 'getTransaction', 'getBlock', 'sendTransaction']);
   return async (input, init = {}) => {
-    // SDK and web3 use URL + init; reject Request/stream inputs instead of
+    // SDK and Kit use URL + init; reject Request/stream inputs instead of
     // silently dropping their headers/body or widening this transport contract.
     requireProfile(typeof input === 'string' || input instanceof URL);
     const url = new URL(String(input)), method = init.method ?? 'GET';
@@ -202,7 +203,7 @@ export async function loadDeployment(profile: ReviewedBrowserProfile) {
   }
   for (const [name, url] of Object.entries(p.artifacts.additional)) additional[name] = await read(url, 64 * 1024 * 1024);
   const deployment: ClientDeployment = { manifest, trust: p.trust, artifacts: { ...artifacts, additional } as unknown as ArtifactBundle,
-    connection: new Connection(p.rpcUrl, { commitment: 'finalized', disableRetryOnRateLimit: true, ...(fetcher ? { fetch: fetcher } : {}) }),
+    connection: createSolanaRpcWithFetch(p.rpcUrl, fetcher ?? globalThis.fetch.bind(globalThis)),
     indexerOrigin: p.indexerOrigin, ...(fetcher ? { fetch: fetcher } : {}), ...(p.preparationCommitment ? { preparationCommitment: p.preparationCommitment } : {}) };
   return { deployment, models: p.models, wasm: await read(p.wasmUrl, 64 * 1024 * 1024), wasmSha256: p.wasmSha256,
     directProviderBases: p.directProviderBases, oaVerifier: p.oaVerifier };
