@@ -1,0 +1,138 @@
+{
+  "schema": 1,
+  "scope": "isolated browser application consumption of SDK tarball; synthetic UI/provider tests only",
+  "started_at": "2026-10-07T05:22:29.562Z",
+  "node": "v24.19.0",
+  "source_sha256": {
+    "LICENSE": "71afea996cef8ff3d3ef4f84705180bb0b124c1c21a16e89fddacd3b482d4fa7",
+    "browser-chat/README.md": "105dbd3644ce997041e9f8bf7d3510e89072126f4d114ff4c294a539b081c5dd",
+    "browser-chat/app.ts": "7967d91308b788941473f129eb48ec7e430f7da567c831a9cf604eef86b6a2bd",
+    "browser-chat/browser.test.ts": "ded66f60036c9e8b6df4ff925b1b478b4217ae6231ae68d082d607d4359a5c77",
+    "browser-chat/build.mjs": "82303dd52b187b52516b867c3dfc4562b9d1508cee45a45f72f73d8c9402f04a",
+    "browser-chat/chat-model.test.ts": "1abb88a6d6a61f8110f39de6848f0f86e03edaeadd3624ccf39423affd63b753",
+    "browser-chat/chat-model.ts": "88d04e370f7ea91b5372beccde01ce7088dedf4045507d0ad03bafc8172b7808",
+    "browser-chat/index.html": "d88ac7c55acbbd737a47c57119674d5d7b9f52ad955d48819b4db3be60785fff",
+    "browser-chat/integration.ts": "a0dd92995c73d45fe596f83b48a72a5776169c390de8cbb6e8a1573071d67b59",
+    "browser-chat/load-deployment.test.ts": "bdcd1886c7c6ffff4a2302cf487965590f6e02f6d9b1d383efba0484063029bd",
+    "browser-chat/load-deployment.ts": "d5cc9f0e23cc67d3323284680b0e8fd9122bd85f899e8150dc17402014252c9b",
+    "browser-chat/main.ts": "c4cba49444adb152829ab0bce90fed5f035926ca64e11cde612cad51ca6479fd",
+    "browser-chat/native-responses.test.ts": "1cb84ee480d817d270632ac351267cc3aed9cb28083e27ebf492f625c2d12cea",
+    "browser-chat/native-responses.ts": "298f67a7b1e3257f75ab2946c7f5a313796f5460727645c9cd5116e96ca1f822",
+    "browser-chat/reviewed-profiles.ts": "ac5c6c5c50cf8e18c417517e7bd7bb9e5ff06bf525732306154efe0094b993f3",
+    "browser-chat/shell.ts": "54ab2b14aa765ed4736938f057a0e1aaac0863da9fed667b0f5a83e38c43f30a",
+    "browser-chat/styles.css": "e855e3ac639a26630c25b14bef9845fe349b6c20837e70c1e5601e3d51e1a6e0",
+    "browser-chat/tsconfig.json": "dc333a97cbadd7c3f114c9ee5f18e8c8dfa7fc63b6949a433326145471059d12",
+    "legacy-wallet/.gitignore": "4d56952b0fb13bf8f9b6c13a6d4c34a075bac3af447636a1df4335d7576e2f97",
+    "legacy-wallet/README.md": "05410feb1fcb31be17492d1c457ec38d0343b2b209d6f1cf363cab301ee3f966",
+    "legacy-wallet/app.ts": "102b222982b68fe7dbb41bd5dcbb4a4b9c262faef13584955db0193f53a78cfa",
+    "legacy-wallet/browser.test.ts": "f1c056a4a0a989778287f1bc055dc59f0717ebb7e7c9f5415be3da8ee16f5550",
+    "legacy-wallet/build.test.ts": "5f4cd237f851f3af2fb4a27832d76612d55df3298931d2145a28fe36952aa46d",
+    "legacy-wallet/build.ts": "60153520599984a27944e84d8c02c8b5b1b755cf1003b200bca298cd9ef410f4",
+    "legacy-wallet/demo-entry.ts": "9606fa2bc4f978d6f56e06fdebab7d6355077c4e48060ef45e6e8b94c2512250",
+    "legacy-wallet/demo-notes.test.ts": "97805020129ecab2ad8dd83aa9ea8e9cf3586270c725243252cfcb24c2ed8fa9",
+    "legacy-wallet/demo-notes.ts": "d18070c0dc092cc002465692863e1cd2b49cdfa5940751ddc60d2d71fe53e394",
+    "legacy-wallet/demo.css": "ae9f9cac5e4a7c8dbf9bd04f6411cbc080f9294c2378551bda8244774354819c",
+    "legacy-wallet/demo.html": "9a78ca86557fc7ce812f047e82efbd16620ad9eb1a35b7daf0f186c7ac11a66f",
+    "legacy-wallet/demo.test.ts": "59f697c53b050223b271645def0efb412f95eaa3852eaf0ce84cf479c9bec2fa",
+    "legacy-wallet/demo.ts": "baaedcb5b7a369faa87e19fa046fe88c5c56278d78f7716a166b74a635981399",
+    "legacy-wallet/diagnostics.test.ts": "ce868b7e8047a72b73c9142018758050c0ad5290fd20b4711b753ded96c820cd",
+    "legacy-wallet/diagnostics.ts": "7e19764c308b17469687b3bbce7c942add61cac4a42fec51c9ee4c04b3050e11",
+    "legacy-wallet/fixture.ts": "9c4b073476c8037708534dd14afe95f191d37fdc47e5074a08a9365ac2d2b00f",
+    "legacy-wallet/index.html": "4efaa048c02d6c75ee108c94019a9ebd6d0fd27e4fc897b34569eb0403d2f8b8",
+    "legacy-wallet/launch.ts": "5a386246c5eabf3be6acaaf731c91b57daac10dd42aa62532fe67717a15d224b",
+    "legacy-wallet/live-view.test.ts": "3da90804923d8611272757db712a5acdfa8911e33a948806a321a21391e5ab6e",
+    "legacy-wallet/live-view.ts": "e10a33ec18cb83bed939d5053d0715391fe13afb7389eba902908ad7b11c02cb",
+    "legacy-wallet/main.ts": "139c27c5bce6146e31e2bd46fc04194dac90bfae309f6d86463cc7844d80edfe",
+    "legacy-wallet/provider-diagnostics.ts": "f19afff30c411bd1ef6b0036708e329b54ba62fba2ad5d6c4731e3328582056b",
+    "legacy-wallet/provider.fixture.ts": "82b3686d2a08bdc5338adcdff266e9fb9dc341f4fd26ca462f408c6ef15ac8f1",
+    "legacy-wallet/provider.test.ts": "1c84dc103ed293c03b4b4e255a2fd28f0c2dbe1b3a2750bd234cd4e61a28b33e",
+    "legacy-wallet/provider.ts": "dc3455cdc8f326a4adcbf7592da645d88496c454ce9631784a531ac4fca340ec",
+    "legacy-wallet/signing-diagnostics.test.ts": "8808af1e01da6a9603574decd31582630af2b596e6e9d5a33c5f0e05fa0dc1a0",
+    "legacy-wallet/signing-diagnostics.ts": "1eebe3c2c60904d5017b1f8137a96961c3462fb29efc56ed2a9f70261d984e24",
+    "legacy-wallet/storage.ts": "d8ee8bee0df4cb6a043d4a66ab5208c26e95fc628a686fea2cf5bb26f92d7af3",
+    "legacy-wallet/style.css": "026b0fd2dc27d996889936ddba5d06334f2e8e0b438af7291a330d8002e764bd",
+    "legacy-wallet/tsconfig.json": "dc333a97cbadd7c3f114c9ee5f18e8c8dfa7fc63b6949a433326145471059d12",
+    "package-lock.json": "f5bf710fb2251c54feeb0b77c2890a4337267ab92488b2f81fb062fe140d2ba8",
+    "package.json": "b3234ff37c13f89a02bb6ef30c6a271696567e48c86c6722ea781c164e6bc284",
+    "scripts/verify-isolated.mjs": "3003759d4ac93cdb60622b97bd936dbdd3f7698c9b0d275094423eb475221c3d",
+    "tests/fixtures/genesis-a.json": "495a322bf4e05eb1e15d9750dbbb11f0782982752ec45efbcd096d5b77c17c96",
+    "tests/static-host.ts": "13e5249856773c97d599385c0bd7e395a717d791960edc271c139c9fd2237ee0",
+    "tsconfig.json": "4cc1e675e77db9bdf846bb0d8f9c26f5e8d810c5737418178b48144e3aef0f2d",
+    "vendor/provenance-0.2.0-devnet.1.json": "a833e88b6e6c8866aff84298e8b3e418f1f21d98dbcdd308937309c467b2fbd9",
+    "vendor/zkapi-solana-sdk-0.2.0-devnet.1.tgz": "e6ff141b1c13c278f1c6d80dbe1397f187290270c583a32545df5fe4fbd45019"
+  },
+  "sdk_version": "0.2.0-devnet.1",
+  "sdk_tarball_sha256": "e6ff141b1c13c278f1c6d80dbe1397f187290270c583a32545df5fe4fbd45019",
+  "stages": [
+    {
+      "name": "clean-install",
+      "command": [
+        "npm",
+        "ci",
+        "--ignore-scripts",
+        "--no-audit",
+        "--no-fund"
+      ],
+      "exit_code": 0,
+      "elapsed_ms": 879,
+      "output": "\nadded 61 packages in 818ms\n"
+    },
+    {
+      "name": "typecheck",
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "exit_code": 0,
+      "elapsed_ms": 3641,
+      "output": "\n> solana-zkapi-client@0.1.0 typecheck\n> tsc --noEmit\n\n"
+    },
+    {
+      "name": "standalone-build",
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "exit_code": 0,
+      "elapsed_ms": 554,
+      "output": "\n> solana-zkapi-client@0.1.0 build\n> node browser-chat/build.mjs\n\n"
+    },
+    {
+      "name": "legacy-build",
+      "command": [
+        "npm",
+        "run",
+        "build:legacy"
+      ],
+      "exit_code": 0,
+      "elapsed_ms": 482,
+      "output": "\n> solana-zkapi-client@0.1.0 build:legacy\n> node legacy-wallet/launch.ts --out-dir dist/legacy-wallet\n\n"
+    },
+    {
+      "name": "ui-tests",
+      "command": [
+        "npm",
+        "test"
+      ],
+      "exit_code": 0,
+      "elapsed_ms": 17964,
+      "output": "\n> solana-zkapi-client@0.1.0 test\n> node --test browser-chat/*.test.ts legacy-wallet/*.test.ts\n\n✔ actual Chrome: unconfigured build has no effects; explicit setup, chat/native history, cancellation and recovery (15888.035254ms)\nℹ Runtime browser: Chrome/154.0.8037.57\n✔ USDC input is exact integer arithmetic and rejects rounding, exponent and negative inputs (1.267426ms)\n✔ only completed turns become future context; each explicit send gets one distinct operation ID (40.550165ms)\n✔ uncertain inference is not replayed and incomplete content is excluded from the next explicit send (1.15509ms)\n✔ a truncated SSE answer is visible as interrupted and never reused as conversation context (2.358422ms)\n✔ pending or expired status prevents inference even with a stale presentation state (0.349848ms)\n✔ cancel holds the conversation lock through delayed response cleanup and never dispatches a second request (11.173775ms)\n✔ privacy copy distinguishes operator content visibility from direct provider usage and metadata (0.433973ms)\n✔ reviewed public JSON rejects private configuration and nonlocal asset/transport substitutions (16.239074ms)\n✔ relay maps bounded control/indexer/RPC calls, keeps direct body and credentials off the relay, and preserves abort (5.806938ms)\n✔ unknown destination/method/query and unsupported RPC fail before network and never fall back (3.753988ms)\n✔ build installs only hash-pinned public JSON into isolated assets and records exact output hashes (878.073839ms)\n✔ public admission hints require exact integer totals and distinguish host enablement from reserved charges (1.021843ms)\n✔ native JSON text readers normalize Responses and Anthropic text without trusting usage (30.788637ms)\n✔ native JSON rejects provider errors, partial Responses and unsupported tool output with redacted errors (3.023346ms)\n✔ both native SSE readers handle every byte split, UTF-8 and CR/CRLF termination (266.020863ms)\n✔ terminal native events are mandatory; a Chat Completions DONE marker is insufficient (1.126467ms)\n✔ Responses completion must agree with displayed deltas and rejects failed/incomplete events (0.819033ms)\n✔ Anthropic block order and terminal reason must complete before a turn is retained (0.640198ms)\n✔ provider error frames and event type mismatches never expose their payloads (0.418319ms)\n✔ early stream exit awaits cancellation, including a delayed SDK settlement attempt (7.732879ms)\n✔ HTTP rejection, decode failures and cleanup failures stay redacted (4.976218ms)\n✔ response and SSE event bounds cancel oversized inputs (2.894175ms)\n✔ production demo runs from the presentation bundle without API/wallet calls or changing stored live data (14694.242084ms)\n✔ Chrome fixtures: wallet rejection/reload and provider one-send/reload/verified-settlement UI share existing SDK journals (2357.739438ms)\nℹ Runtime browser: Chrome/154.0.8037.57\n✔ production build defaults to live with a separate sample; reused fixture output removes the sample (433.629433ms)\n✔ initial deposit retains legacy ID and uses two USDC; reopened SDK operation blocks replacement (98.841317ms)\n✔ closed-note rotation preserves prior ciphertext and history; reload selects the new note (51.207168ms)\n✔ two independent journal clients cannot allocate two new active deposits (38.185769ms)\n✔ failure after SDK creation reopens that saved operation; failure before creation reuses the same absent ID (9.741419ms)\n✔ paid active legacy balance, uncertain sessions, and incomplete withdrawals never allow a new deposit (38.794425ms)\n✔ discovery refuses a later run while an earlier note remains unresolved (38.928284ms)\n✔ read-only budget snapshot validates identity and exact integer accounting; zero availability is valid (3.204905ms)\n✔ fixed demo projections conserve integer USDC and charge only on settlement (1.839925ms)\n✔ manual next is single-step, and reset fences an already queued transition (1.396578ms)\n✔ autoplay pauses without stale progress, then finishes once and disposes timers (1.788859ms)\n✔ provider failure preserves finite HTTP/code diagnostics without upstream values (0.81054ms)\n✔ diagnostics distinguish signing guards without echoing arbitrary data (0.239544ms)\n✔ saved-attempt recovery failures use exact finite labels and never echo details (0.311932ms)\n✔ known browser exception names return fixed labels without their message (0.255508ms)\n✔ note expiry warns before its boundary and forbids suggesting another API request after it (1.587871ms)\n✔ escape UI permits only explicit idle, never-signed fallback, or pending-escape finalization paths (0.74242ms)\n✔ compact deposit offers one signature and explicit rejection recovery, never expired-setup recovery (0.361515ms)\n✔ expired setup recovery is offered only for unresolved create-only deposits (0.523836ms)\n✔ expired mutual-close setup is offered only with verified clearance and create-only saved attempts (0.727167ms)\n✔ expired ordinary and emergency escape setup offer only the same unresolved create-only recovery (0.849277ms)\n✔ unfunded or disconnected state never presents candidate deposit as usable money (0.218013ms)\n✔ active deposit is available only without unresolved session or wallet operation (0.2157ms)\n✔ unknown AUTH remains distinguishable from an accepted session and successful API response (0.218954ms)\n✔ unknown inference prevents replay instructions even when session is active or closing (0.341065ms)\n✔ current-page response observation explains a saved unknown operation without advancing financial state (0.386092ms)\n✔ a received answer is not a signed settlement or a paid charge (0.167779ms)\n✔ terminal absence and close intent do not encourage an API send (0.154228ms)\n✔ only verified settlement history contributes to paid; latest pending session stays unverified (0.39207ms)\n✔ zero-charge and operator-loss waiver do not establish successful API use (1.19594ms)\n✔ mutual-close return amount requires closed note and exact finalized execute signature (0.24292ms)\n✔ escape status, current signature and failed operation retain recovery presentation (0.145015ms)\n✔ signed clearance and missing provider never offer another API authorization (0.105446ms)\n✔ integer formatting preserves micro-USDC beyond JavaScript safe integer precision (0.144134ms)\n✔ busy/disconnected headlines take precedence, and projection leaves journal byte-equivalent (0.251342ms)\n✔ repeat demo explains the exact authorization reserve without enabling an underfunded request (0.229029ms)\n✔ disabled-request hints distinguish reconnect, saved recovery, clearance and completed run (0.228439ms)\n✔ fixed browser body retains the public parent budget template; prepares after snapshot and verifies charge through SDK before withdrawal is available (119.709795ms)\n✔ lost AUTH can only resend its exact bytes; lost inference stays one send after encrypted journal reopen (104.09756ms)\n✔ invalid successor retains old balance and pending operation; explicit recovery succeeds without another inference (99.298715ms)\n✔ never-sent cancellation uses SDK cancellation; unknown inference absence requires terminal SDK reconciliation (184.371796ms)\n✔ two UI intents cannot create two operations; different body or case is rejected before control/inference (168.82768ms)\n✔ explicit demo uses a new AUTH and operation only after SDK verified the prior zero-charge successor (307.280086ms)\n✔ a funded repeat demo preserves paid settlements and uses fresh request IDs across journal reopen (414.633147ms)\n✔ an untouched message remains equal despite a signature, without exposing private bytes or mutating either input (17.387574ms)\n✔ blockhash mutation is distinguished from instruction or account changes (3.560311ms)\n✔ added or changed compute-unit price is reported exactly without authorizing message mutation (4.289841ms)\n✔ an added assertion-like program keeps originals but is distinct from an unchanged instruction list (2.859995ms)\n✔ changed non-compute data, account or writable flags never count as retained (2.909949ms)\n✔ non-compute comparison preserves order, multiplicity and signer flags (3.374636ms)\n✔ malformed or non-compute payloads never masquerade as decoded compute settings (4.668983ms)\n✔ unresolved ALT changes cannot establish byte-equivalent non-compute instructions (2.520151ms)\nℹ tests 77\nℹ suites 0\nℹ pass 77\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 17850.597311\n"
+    }
+  ],
+  "source_unchanged": true,
+  "success": true,
+  "sdk_installed_as_extracted_package": true,
+  "kit_version": "8.4.0",
+  "legacy_solana_runtime_absent": true,
+  "tests": {
+    "tests": 77,
+    "pass": 77,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "finished_at": "2026-10-07T05:22:53.100Z"
+}

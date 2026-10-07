@@ -1,0 +1,153 @@
+{
+  "schema": 1,
+  "scope": "Hosted independent client package installation, application builds and synthetic browser tests; no live provider or public-chain acceptance",
+  "run": {
+    "conclusion": "success",
+    "createdAt": "2026-10-07T05:22:11Z",
+    "databaseId": 37575958917,
+    "headSha": "4a1167d4bf24535ef68475d4acafc9fbbd5bb909",
+    "jobs": [
+      {
+        "completedAt": "2026-10-07T05:22:57Z",
+        "conclusion": "success",
+        "databaseId": 112644797877,
+        "name": "browser-applications",
+        "startedAt": "2026-10-07T05:22:14Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-10-07T05:22:17Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-10-07T05:22:15Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-07T05:22:18Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+            "number": 2,
+            "startedAt": "2026-10-07T05:22:17Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-07T05:22:24Z",
+            "conclusion": "success",
+            "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+            "number": 3,
+            "startedAt": "2026-10-07T05:22:18Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-07T05:22:29Z",
+            "conclusion": "success",
+            "name": "Install pinned npm and dependencies",
+            "number": 4,
+            "startedAt": "2026-10-07T05:22:24Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-07T05:22:53Z",
+            "conclusion": "success",
+            "name": "Verify independent installation, both builds and all browser tests",
+            "number": 5,
+            "startedAt": "2026-10-07T05:22:29Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-07T05:22:54Z",
+            "conclusion": "success",
+            "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            "number": 6,
+            "startedAt": "2026-10-07T05:22:53Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-07T05:22:54Z",
+            "conclusion": "success",
+            "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+            "number": 11,
+            "startedAt": "2026-10-07T05:22:54Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-07T05:22:54Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+            "number": 12,
+            "startedAt": "2026-10-07T05:22:54Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-07T05:22:54Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 13,
+            "startedAt": "2026-10-07T05:22:54Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/yukikm/solana-zkapi-client/actions/runs/37575958917/job/112644797877"
+      }
+    ],
+    "status": "completed",
+    "updatedAt": "2026-10-07T05:22:58Z",
+    "url": "https://github.com/yukikm/solana-zkapi-client/actions/runs/37575958917",
+    "workflowName": "independent-client"
+  },
+  "artifact": {
+    "id": 11463166155,
+    "node_id": "MDg6QXJ0aWZhY3QxMTQ2MzE2NjE1NQ==",
+    "name": "isolated-client-kit-migration",
+    "size_in_bytes": 7156,
+    "url": "https://api.github.com/repos/yukikm/solana-zkapi-client/actions/artifacts/11463166155",
+    "archive_download_url": "https://api.github.com/repos/yukikm/solana-zkapi-client/actions/artifacts/11463166155/zip",
+    "expired": false,
+    "digest": "sha256:069179d4eff07c1642d85b4ab8bdd2555350dd36096c6ce05c4668623e40e667",
+    "created_at": "2026-10-07T05:22:54Z",
+    "updated_at": "2026-10-07T05:22:54Z",
+    "expires_at": "2027-01-05T05:22:11Z",
+    "workflow_run": {
+      "id": 37575958917,
+      "repository_id": 1408133358,
+      "head_repository_id": 1408133358,
+      "head_branch": "main",
+      "head_sha": "4a1167d4bf24535ef68475d4acafc9fbbd5bb909"
+    }
+  },
+  "isolated_result": "kit-migration-hosted-isolated.json",
+  "isolated_result_sha256": "ae7e9ba4e9720a01aa8cf2b8184b062e746b7bf12e25266177921137fa0be115",
+  "isolated_result_bytes": 16284,
+  "hosted_log_sha256": "adb60ced0e9ffa9a316431e2a77d7d217a55d2a8c358c1a9c8aeee6ebd0879ff",
+  "hosted_log_bytes": 30530,
+  "checks": {
+    "all_five_isolation_stages_passed": true,
+    "tests": {
+      "tests": 77,
+      "pass": 77,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "source_inputs": 56,
+    "source_unchanged_during_test": true,
+    "all_source_hashes_match_tested_commit": true,
+    "sdk_version": "0.2.0-devnet.1",
+    "sdk_tarball_sha256": "e6ff141b1c13c278f1c6d80dbe1397f187290270c583a32545df5fe4fbd45019",
+    "kit_version": "8.4.0",
+    "legacy_solana_runtime_absent": true,
+    "sdk_installed_as_extracted_package": true,
+    "browser_versions": [
+      "Chrome/154.0.8037.57"
+    ]
+  },
+  "preserved_failed_run": "kit-migration-hosted-failure.json",
+  "preserved_initial_local_result": "kit-migration-isolated-initial-results.json",
+  "limitations": [
+    "Browser tests use synthetic wallet, provider and proof inputs.",
+    "No production operator, live Phantom, funding or public-chain acceptance is established.",
+    "This hosted client result does not replace core protocol release gates or verify a release signature."
+  ]
+}

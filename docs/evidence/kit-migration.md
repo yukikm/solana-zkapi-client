@@ -44,3 +44,11 @@ application actions. The full independent local check then passed 77/77 with
 56 unchanged inputs; the [initial local report](kit-migration-isolated-initial-results.json)
 is preserved separately. Only the two browser test source hashes changed; SDK
 archive, runtime, custody and deployment inputs remained unchanged.
+
+The corrected hosted [independent-client run 37575958917](https://github.com/yukikm/solana-zkapi-client/actions/runs/37575958917)
+passed on commit `4a1167d4bf24535ef68475d4acafc9fbbd5bb909`: all five stages,
+77/77 tests, zero skips and 56 unchanged source inputs. The downloaded
+[hosted report](kit-migration-hosted.json) joins every input hash to that exact
+commit and confirms the extracted SDK digest, Kit 8.4.0, no legacy Solana runtime
+and actual Chrome 154.0.8037.57. This is synthetic integration acceptance,
+separate from the preserved failed observation and live/provider evidence.

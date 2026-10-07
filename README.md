@@ -33,9 +33,10 @@ package does not invent trust pins or contain private service credentials.
 
 `npm run verify:isolated` reproduces clean installation and both application builds
 in a temporary directory without a core checkout. [Kit migration evidence](docs/evidence/kit-migration.md)
-records the current package; [preview evidence](docs/evidence/devnet-preview.md)
-and [migration evidence](docs/evidence/migration.md) preserve earlier checks. The GitHub Actions workflow runs the same
-isolation check and requires all browser tests to run without skips.
+records the current package. Historical [preview evidence](docs/evidence/devnet-preview.md)
+and [migration evidence](docs/evidence/migration.md) retain earlier package checks.
+The GitHub Actions workflow runs the same isolation check and requires all
+browser tests to run without skips.
 
 `npm run check` runs strict typechecking, builds both applications and runs
 the migrated tests. Browser tests use an isolated Chromium profile and synthetic
